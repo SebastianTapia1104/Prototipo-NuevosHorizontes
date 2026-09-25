@@ -34,7 +34,7 @@
         <aside class="login-lado solo-alta">
           <p class="login-kicker">Edificio Nuevos Horizontes</p>
           <h2>Gastos comunes, en un solo lugar</h2>
-          <p>160 departamentos. La administración cobra y los residentes consultan su estado sin planillas.</p>
+          <p>Dos administradores gestionan cada uno a sus arrendatarios. El arrendatario solo ve su unidad.</p>
           <ul>
             <li>Registro de residentes</li>
             <li>Cuotas, montos y fechas</li>
@@ -44,7 +44,7 @@
         <form class="tarjeta tarjeta-login" id="form-login">
         <p class="etiqueta-funcion">Función 1 · Inicio de sesión</p>
         <h1>Ingreso al sistema</h1>
-        <p class="ayuda">Administración y residentes consultan cuotas, pagos y avisos de morosidad en un mismo lugar.</p>
+        <p class="ayuda">Cada administrador cobra solo a sus residentes. El arrendatario paga su cuota y revisa sus avisos.</p>
         <div class="campo">
           <label for="usuario">Usuario</label>
           <input id="usuario" name="usuario" type="text" autocomplete="username" required placeholder="Ej. administrador">
@@ -57,8 +57,9 @@
         <button class="btn btn-primario" type="submit">Ingresar</button>
         <div class="demo">
           <p><strong>Cuentas de demostración</strong></p>
-          <p>Administración: usuario <code>administrador</code>, contraseña <code>1234</code></p>
-          <p>Residente: usuario <code>residente</code>, contraseña <code>1234</code></p>
+          <p>Administrador Camila Soto: usuario <code>administrador</code>, contraseña <code>1234</code></p>
+          <p>Administrador Elena Muñoz: usuario <code>administrador2</code>, contraseña <code>1234</code></p>
+          <p>Arrendatario de Camila: usuario <code>arrendatario</code>, contraseña <code>1234</code></p>
         </div>
         </form>
       </div>
@@ -67,7 +68,7 @@
     <section id="vista-app" class="vista" hidden>
       <nav class="nav-funciones" aria-label="Funciones clave">
         <button type="button" class="nav-item" data-pantalla="inicio">Inicio</button>
-        <button type="button" class="nav-item" data-pantalla="residentes">2 · Registro de residentes</button>
+        <button type="button" class="nav-item" id="nav-residentes" data-pantalla="residentes">2 · Registro de residentes</button>
         <button type="button" class="nav-item" data-pantalla="cuotas">3 · Cuotas y pagos</button>
         <button type="button" class="nav-item" data-pantalla="alertas">4 · Recordatorios por morosidad</button>
       </nav>
@@ -78,8 +79,8 @@
         <div class="grilla-funciones">
           <button type="button" class="tarjeta funcion" data-pantalla="residentes">
             <span class="num">2</span>
-            <h2>Registro de residentes</h2>
-            <p>Nombre, unidad, contacto y tipo de residencia.</p>
+            <h2 id="titulo-card-residentes">Registro de residentes</h2>
+            <p>Nombre, unidad y contacto del arrendatario.</p>
           </button>
           <button type="button" class="tarjeta funcion" data-pantalla="cuotas">
             <span class="num">3</span>
@@ -95,11 +96,12 @@
       </div>
 
       <div id="pantalla-residentes" class="pantalla" hidden>
-        <p class="etiqueta-funcion">Función 2 · Gestión del registro de residentes</p>
-        <h1>Residentes</h1>
+        <p class="etiqueta-funcion" id="etiqueta-residentes">Función 2 · Gestión del registro de residentes</p>
+        <h1 id="titulo-residentes">Residentes</h1>
         <p class="ayuda" id="ayuda-residentes"></p>
         <form class="tarjeta formulario" id="form-residente">
-          <h2>Registrar residente</h2>
+          <h2>Agregar arrendatario</h2>
+          <p class="ayuda">Solo se agregan residentes arrendatarios de su cargo. No se crean otros administradores.</p>
           <div class="fila">
             <div class="campo">
               <label for="nombre">Nombre</label>
@@ -110,25 +112,16 @@
               <input id="unidad" name="unidad" required placeholder="Ej. 1204">
             </div>
           </div>
-          <div class="fila">
-            <div class="campo">
-              <label for="contacto">Contacto</label>
-              <input id="contacto" name="contacto" type="email" required placeholder="correo@ejemplo.cl">
-            </div>
-            <div class="campo">
-              <label for="tipo">Tipo de residencia</label>
-              <select id="tipo" name="tipo" required>
-                <option value="Propietario">Propietario</option>
-                <option value="Arrendatario">Arrendatario</option>
-              </select>
-            </div>
+          <div class="campo">
+            <label for="contacto">Contacto</label>
+            <input id="contacto" name="contacto" type="email" required placeholder="correo@ejemplo.cl">
           </div>
-          <p class="ok" id="ok-residente" role="status" hidden>Residente registrado. Ya puede asociarse una cuota.</p>
-          <button class="btn btn-primario" type="submit">Guardar residente</button>
+          <p class="ok" id="ok-residente" role="status" hidden>Arrendatario agregado a sus residentes.</p>
+          <button class="btn btn-primario" type="submit">Guardar arrendatario</button>
         </form>
-        <div class="tabla-wrap">
+        <div class="tabla-wrap" id="tabla-residentes-wrap">
           <table>
-            <caption>Residentes registrados</caption>
+            <caption>Arrendatarios a su cargo</caption>
             <thead>
               <tr>
                 <th>Nombre</th>
@@ -140,12 +133,16 @@
             <tbody id="tabla-residentes"></tbody>
           </table>
         </div>
+        <div class="tarjeta" id="ficha-arrendatario" hidden>
+          <h2>Ficha de arrendatario</h2>
+          <dl id="datos-ficha"></dl>
+        </div>
       </div>
 
       <div id="pantalla-cuotas" class="pantalla" hidden>
         <p class="etiqueta-funcion">Función 3 · Visualización de cuotas y pagos</p>
         <h1>Cuotas y pagos</h1>
-        <p class="ayuda">Cada fila muestra el monto, la fecha de vencimiento o de pago, y el estado con texto, no solo con color.</p>
+        <p class="ayuda" id="ayuda-cuotas"></p>
         <div class="resumen" id="resumen-cuotas"></div>
         <div class="tabla-wrap">
           <table>
@@ -164,10 +161,10 @@
           </table>
         </div>
         <form class="tarjeta formulario" id="form-pago">
-          <h2>Registrar pago</h2>
+          <h2 id="titulo-pago">Registrar cobro</h2>
           <div class="fila">
             <div class="campo">
-              <label for="cuota-pago">Cuota pendiente</label>
+              <label for="cuota-pago" id="label-cuota">Cuota por cobrar</label>
               <select id="cuota-pago" required></select>
             </div>
             <div class="campo">
@@ -175,8 +172,8 @@
               <input id="fecha-pago" type="date" required>
             </div>
           </div>
-          <p class="ok" id="ok-pago" role="status" hidden>Pago registrado. La cuota pasó a estado Pagado.</p>
-          <button class="btn btn-primario" type="submit">Registrar pago</button>
+          <p class="ok" id="ok-pago" role="status" hidden></p>
+          <button class="btn btn-primario" id="btn-pago" type="submit">Registrar cobro</button>
         </form>
       </div>
 

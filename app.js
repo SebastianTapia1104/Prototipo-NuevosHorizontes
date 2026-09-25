@@ -1,23 +1,42 @@
 const cuentas = {
-  administrador: { clave: "1234", rol: "admin", nombre: "Administración del edificio" },
-  residente: { clave: "1234", rol: "residente", nombre: "Andrés Paredes", unidad: "1202" }
+  administrador: { clave: "1234", rol: "administrador", administra: true, nombre: "Camila Soto", unidad: "804" },
+  administrador2: { clave: "1234", rol: "administrador", administra: true, nombre: "Elena Muñoz", unidad: "305" },
+  arrendatario: { clave: "1234", rol: "arrendatario", administra: false, nombre: "Andrés Paredes", unidad: "1202" }
 };
 
 const semilla = {
   residentes: [
-    { id: 1, nombre: "Camila Soto", unidad: "804", contacto: "camila.soto@correo.cl", tipo: "Propietario" },
-    { id: 2, nombre: "Andrés Paredes", unidad: "1202", contacto: "andres.paredes@correo.cl", tipo: "Arrendatario" },
-    { id: 3, nombre: "Elena Muñoz", unidad: "305", contacto: "elena.munoz@correo.cl", tipo: "Propietario" }
+    { id: 1, nombre: "Camila Soto", unidad: "804", contacto: "camila.soto@correo.cl", tipo: "Administrador" },
+    { id: 11, nombre: "Andrés Paredes", unidad: "1202", contacto: "andres.paredes@correo.cl", tipo: "Arrendatario", propietarioId: 1 },
+    { id: 12, nombre: "Paula Riquelme", unidad: "1203", contacto: "paula.riquelme@correo.cl", tipo: "Arrendatario", propietarioId: 1 },
+    { id: 13, nombre: "Mateo Fuentes", unidad: "1205", contacto: "mateo.fuentes@correo.cl", tipo: "Arrendatario", propietarioId: 1 },
+    { id: 14, nombre: "Sofía Araya", unidad: "1206", contacto: "sofia.araya@correo.cl", tipo: "Arrendatario", propietarioId: 1 },
+    { id: 15, nombre: "Diego Salas", unidad: "1208", contacto: "diego.salas@correo.cl", tipo: "Arrendatario", propietarioId: 1 },
+    { id: 2, nombre: "Elena Muñoz", unidad: "305", contacto: "elena.munoz@correo.cl", tipo: "Administrador" },
+    { id: 21, nombre: "Luis Rojas", unidad: "306", contacto: "luis.rojas@correo.cl", tipo: "Arrendatario", propietarioId: 2 },
+    { id: 22, nombre: "Valentina Cruz", unidad: "307", contacto: "valentina.cruz@correo.cl", tipo: "Arrendatario", propietarioId: 2 },
+    { id: 23, nombre: "Jorge Núñez", unidad: "308", contacto: "jorge.nunez@correo.cl", tipo: "Arrendatario", propietarioId: 2 },
+    { id: 24, nombre: "Camila Herrera", unidad: "309", contacto: "camila.herrera@correo.cl", tipo: "Arrendatario", propietarioId: 2 },
+    { id: 25, nombre: "Renato Vidal", unidad: "310", contacto: "renato.vidal@correo.cl", tipo: "Arrendatario", propietarioId: 2 }
   ],
   cuotas: [
-    { id: 1, residenteId: 1, concepto: "Gastos comunes marzo", monto: 85000, fecha: "2026-03-05", estado: "Pagado" },
-    { id: 2, residenteId: 1, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-05", estado: "Pendiente" },
-    { id: 3, residenteId: 2, concepto: "Gastos comunes marzo", monto: 85000, fecha: "2026-03-05", estado: "Vencido" },
-    { id: 4, residenteId: 2, concepto: "Gastos comunes abril", monto: 92000, fecha: "2026-04-05", estado: "Vencido" },
-    { id: 5, residenteId: 3, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-10", estado: "Pendiente" }
+    { id: 101, residenteId: 1, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-05", estado: "Pendiente" },
+    { id: 111, residenteId: 11, concepto: "Gastos comunes marzo", monto: 85000, fecha: "2026-03-05", estado: "Vencido" },
+    { id: 112, residenteId: 11, concepto: "Gastos comunes abril", monto: 92000, fecha: "2026-04-05", estado: "Vencido" },
+    { id: 121, residenteId: 12, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-05", estado: "Pagado" },
+    { id: 131, residenteId: 13, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-08", estado: "Pendiente" },
+    { id: 141, residenteId: 14, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-05", estado: "Vencido" },
+    { id: 151, residenteId: 15, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-12", estado: "Pagado" },
+    { id: 201, residenteId: 2, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-10", estado: "Pagado" },
+    { id: 211, residenteId: 21, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-05", estado: "Vencido" },
+    { id: 221, residenteId: 22, concepto: "Gastos comunes abril", monto: 78000, fecha: "2026-04-06", estado: "Pendiente" },
+    { id: 231, residenteId: 23, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-04", estado: "Vencido" },
+    { id: 241, residenteId: 24, concepto: "Gastos comunes abril", monto: 85000, fecha: "2026-04-09", estado: "Pagado" },
+    { id: 251, residenteId: 25, concepto: "Gastos comunes abril", monto: 90000, fecha: "2026-04-11", estado: "Pendiente" }
   ],
   alertas: [
-    { id: 1, residenteId: 2, fecha: "2026-04-12", texto: "Tiene cuotas vencidas por $177.000. Regularice el pago para evitar recargos." }
+    { id: 1, residenteId: 11, fecha: "2026-04-12", texto: "Tiene cuotas vencidas por $177.000. Regularice el pago para evitar recargos." },
+    { id: 2, residenteId: 21, fecha: "2026-04-12", texto: "Unidad 306: tiene una cuota vencida por $85.000. Revise el detalle en Cuotas y pagos." }
   ]
 };
 
@@ -25,13 +44,13 @@ const estado = cargar();
 let sesion = null;
 
 function cargar() {
-  const guardado = localStorage.getItem("nh-proto");
+  const guardado = localStorage.getItem("nh-proto-v4");
   if (guardado) return JSON.parse(guardado);
   return structuredClone(semilla);
 }
 
 function guardar() {
-  localStorage.setItem("nh-proto", JSON.stringify(estado));
+  localStorage.setItem("nh-proto-v4", JSON.stringify(estado));
 }
 
 function $(id) { return document.getElementById(id); }
@@ -77,25 +96,56 @@ function mostrar(idPantalla) {
   if (idPantalla === "alertas") pintarAlertas();
 }
 
+function etiquetaRol(cuenta) {
+  if (cuenta.administra) return "Administrador";
+  return "Arrendatario";
+}
+
+function textoRol(cuenta) {
+  if (cuenta.administra) {
+    return `${cuenta.nombre} es administrador y gestiona solo a sus arrendatarios. Desde aquí los registra, cobra sus cuotas y les envía recordatorios. No ve la información del otro administrador.`;
+  }
+  return "Desde aquí consulta lo que debe su unidad y los recordatorios por morosidad. No administra las cuentas del edificio.";
+}
+
+function idPropietarioSesion() {
+  const propio = estado.residentes.find((r) => r.nombre === sesion.nombre && r.tipo === "Administrador");
+  return propio ? propio.id : null;
+}
+
+function arrendatariosDelPropietario() {
+  const id = idPropietarioSesion();
+  return estado.residentes.filter((r) => r.tipo === "Arrendatario" && r.propietarioId === id);
+}
+
 function entrar(cuenta, usuario) {
   sesion = { usuario, ...cuenta };
   $("vista-login").hidden = true;
   $("vista-app").hidden = false;
   $("btn-salir").hidden = false;
   $("sesion-texto").hidden = false;
-  $("sesion-texto").textContent = `${cuenta.nombre} · ${cuenta.rol === "admin" ? "Administración" : "Residente"}`;
-  $("saludo").textContent = cuenta.rol === "admin" ? "Panel de administración" : `Hola, ${cuenta.nombre}`;
-  $("texto-rol").textContent = cuenta.rol === "admin"
-    ? "Desde aquí se registran residentes, se revisan cuotas y se envían recordatorios a quienes están en morosidad."
-    : "Desde aquí consulta sus cuotas, el historial de pagos y los recordatorios recibidos.";
-  const esAdmin = cuenta.rol === "admin";
+  $("sesion-texto").textContent = `${cuenta.nombre} · ${etiquetaRol(cuenta)}`;
+  $("saludo").textContent = cuenta.administra ? "Cobro del edificio" : `Hola, ${cuenta.nombre}`;
+  $("texto-rol").textContent = textoRol(cuenta);
+  const esAdmin = cuenta.administra;
   $("form-residente").hidden = !esAdmin;
-  $("form-pago").hidden = !esAdmin;
   $("bloque-envio").hidden = !esAdmin;
   $("bloque-bandeja").hidden = esAdmin;
+  $("nav-residentes").textContent = esAdmin ? "2 · Registro de residentes" : "2 · Ficha de arrendatario";
+  $("titulo-card-residentes").textContent = esAdmin ? "Registro de residentes" : "Ficha de arrendatario";
+  $("etiqueta-residentes").textContent = esAdmin
+    ? "Función 2 · Gestión del registro de residentes"
+    : "Función 2 · Ficha de arrendatario";
+  $("titulo-residentes").textContent = esAdmin ? "Residentes a su cargo" : "Ficha de arrendatario";
+  $("tabla-residentes-wrap").hidden = !esAdmin;
+  $("ficha-arrendatario").hidden = esAdmin;
   $("ayuda-residentes").textContent = esAdmin
-    ? "Registre nombre, unidad y contacto. El edificio distingue propietarios y arrendatarios."
-    : "Estos son los datos de residentes visibles para su unidad. El alta la realiza la administración.";
+    ? "Solo ve a los arrendatarios de su cargo. No aparece la información del otro administrador. El alta es únicamente de arrendatarios."
+    : "Estos son sus datos de arrendatario. No administra el registro de otros residentes.";
+  const textos = esAdmin
+    ? ["Agregar arrendatarios a su cargo.", "Cobro de las cuotas de sus residentes.", "Avisos a sus arrendatarios con cuotas vencidas."]
+    : ["Sus datos de arrendatario.", "Pagar la cuota de su unidad.", "Avisos de morosidad recibidos."];
+  document.querySelectorAll(".funcion p").forEach((p, i) => { p.textContent = textos[i]; });
   mostrar("inicio");
 }
 
@@ -110,17 +160,27 @@ function salir() {
 }
 
 function pintarResidentes() {
-  const lista = sesion && sesion.rol === "residente"
-    ? estado.residentes.filter((r) => r.nombre === sesion.nombre)
-    : estado.residentes;
-  const filas = lista.map((r) =>
-    `<tr><td>${r.nombre}</td><td>${r.unidad}</td><td>${r.contacto}</td><td>${r.tipo}</td></tr>`
+  if (sesion && !sesion.administra) {
+    const ficha = estado.residentes.find((r) => r.nombre === sesion.nombre);
+    $("datos-ficha").innerHTML = ficha
+      ? `<dt>Nombre</dt><dd>${ficha.nombre}</dd><dt>Unidad</dt><dd>${ficha.unidad}</dd><dt>Contacto</dt><dd>${ficha.contacto}</dd><dt>Tipo</dt><dd>Arrendatario</dd>`
+      : "";
+    return;
+  }
+  const filas = arrendatariosDelPropietario().map((r) =>
+    `<tr><td>${r.nombre}</td><td>${r.unidad}</td><td>${r.contacto}</td><td>Arrendatario · paga su cuota</td></tr>`
   ).join("");
-  $("tabla-residentes").innerHTML = filas || "<tr><td colspan='4'>Sin residentes registrados.</td></tr>";
+  $("tabla-residentes").innerHTML = filas || "<tr><td colspan='4'>Aún no tiene arrendatarios a su cargo.</td></tr>";
 }
 
 function cuotasVisibles() {
-  if (!sesion || sesion.rol === "admin") return estado.cuotas;
+  if (!sesion) return [];
+  if (sesion.administra) {
+    const ids = new Set(arrendatariosDelPropietario().map((r) => r.id));
+    const yo = idPropietarioSesion();
+    if (yo) ids.add(yo);
+    return estado.cuotas.filter((c) => ids.has(c.residenteId));
+  }
   const propio = estado.residentes.find((r) => r.nombre === sesion.nombre);
   return estado.cuotas.filter((c) => propio && c.residenteId === propio.id);
 }
@@ -149,18 +209,32 @@ function pintarCuotas() {
     <p><strong>Pagadas:</strong> ${pagadas.length}</p>
     <p><strong>Monto por regularizar:</strong> ${formatoMonto(deuda)}</p>`;
 
+  $("ayuda-cuotas").textContent = sesion && sesion.administra
+    ? "Como administrador ve las cuentas de sus residentes y registra el cobro. El estado se lee en texto: Pagado, Pendiente o Vencido."
+    : "Como arrendatario ve la cuota de su unidad y puede pagarla. El estado se lee en texto: Pagado, Pendiente o Vencido.";
+
   const select = $("cuota-pago");
-  const abiertas = (sesion && sesion.rol === "admin" ? estado.cuotas : lista).filter((c) => c.estado !== "Pagado");
+  const abiertas = lista.filter((c) => c.estado !== "Pagado");
   select.innerHTML = abiertas.map((c) => {
     const r = residentePorId(c.residenteId);
     return `<option value="${c.id}">${r ? r.unidad : ""} · ${c.concepto} · ${formatoMonto(c.monto)} · ${c.estado}</option>`;
   }).join("");
-  $("form-pago").hidden = !sesion || sesion.rol !== "admin" || abiertas.length === 0;
+  const hay = abiertas.length > 0;
+  $("form-pago").hidden = !hay;
+  if (sesion && sesion.administra) {
+    $("titulo-pago").textContent = "Registrar cobro";
+    $("label-cuota").textContent = "Cuota por cobrar";
+    $("btn-pago").textContent = "Registrar cobro";
+  } else {
+    $("titulo-pago").textContent = "Pagar mi cuota";
+    $("label-cuota").textContent = "Cuota de mi unidad";
+    $("btn-pago").textContent = "Pagar";
+  }
 }
 
 function morosos() {
   const ids = new Set(estado.cuotas.filter((c) => c.estado === "Vencido").map((c) => c.residenteId));
-  return estado.residentes.filter((r) => ids.has(r.id));
+  return arrendatariosDelPropietario().filter((r) => ids.has(r.id));
 }
 
 function pintarAlertas() {
@@ -178,9 +252,9 @@ function pintarAlertas() {
   $("bandeja").innerHTML = avisos.length
     ? avisos.map((a) => `<li><strong>Recordatorio ${formatoFecha(a.fecha)}</strong><br>${a.texto}</li>`).join("")
     : "<li>No tiene recordatorios.</li>";
-  $("ayuda-alertas").textContent = sesion && sesion.rol === "admin"
-    ? "Identifique a quienes tienen cuotas vencidas y envíe un aviso con el monto adeudado."
-    : "Aquí aparecen los recordatorios que la administración envió por cuotas vencidas.";
+  $("ayuda-alertas").textContent = sesion && sesion.administra
+    ? "Identifique a quienes tienen cuotas vencidas y envíe el aviso. El cobro lo hace cada administrador sobre sus residentes."
+    : "Aquí aparecen los recordatorios que su administrador envió a su unidad.";
 }
 
 $("form-login").addEventListener("submit", (e) => {
@@ -210,12 +284,14 @@ $("form-residente").addEventListener("submit", (e) => {
   e.preventDefault();
   const data = new FormData(e.target);
   const id = Date.now();
+  const idDueno = idPropietarioSesion();
   estado.residentes.push({
     id,
     nombre: data.get("nombre").trim(),
     unidad: data.get("unidad").trim(),
     contacto: data.get("contacto").trim(),
-    tipo: data.get("tipo")
+    tipo: "Arrendatario",
+    propietarioId: idDueno
   });
   estado.cuotas.push({
     id: id + 1,
@@ -227,6 +303,7 @@ $("form-residente").addEventListener("submit", (e) => {
   });
   guardar();
   e.target.reset();
+  $("ok-residente").textContent = "Arrendatario agregado. Solo usted lo ve; no se creó otro administrador.";
   $("ok-residente").hidden = false;
   pintarResidentes();
 });
@@ -239,6 +316,9 @@ $("form-pago").addEventListener("submit", (e) => {
   cuota.estado = "Pagado";
   cuota.fecha = $("fecha-pago").value;
   guardar();
+  $("ok-pago").textContent = sesion && sesion.administra
+    ? "Cobro registrado. La cuota pasó a estado Pagado."
+    : "Pago realizado. La cuota de su unidad pasó a estado Pagado.";
   $("ok-pago").hidden = false;
   pintarCuotas();
 });

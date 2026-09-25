@@ -286,6 +286,8 @@ body.modo-baja th { background: #f7f7f7; }
   background: #fff;
 }
 .lista .meta { color: var(--suave); font-size: 0.95rem; }
+#datos-ficha { display: grid; grid-template-columns: 8rem 1fr; gap: 8px 12px; margin: 0; }
+#datos-ficha dt { font-weight: 700; }
 
 .formulario { margin-top: 8px; }
 #bloque-envio, #bloque-bandeja { margin-bottom: 16px; }
@@ -501,4 +503,7 @@ body.modo-alta input:focus, body.modo-alta select:focus {
     font-size: 0.78rem;
     word-break: break-word;
   }
+  input, select { width: 100%; max-width: 100%; min-width: 0; }
+  .formulario, .fila, .campo { min-width: 0; max-width: 100%; }
+  .campo { overflow: hidden; }
 }
