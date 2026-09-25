@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nuevos Horizontes — Gastos comunes</title>
+  <link id="estilos" rel="stylesheet" href="estilos.css">
+</head>
+<body class="modo-alta">
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="barra">
+    <div class="marca">
+      <span class="logo" aria-hidden="true">NH</span>
+      <div>
+        <p class="marca-nombre">Nuevos Horizontes</p>
+        <p class="marca-sub">Gestión de gastos comunes</p>
+      </div>
+    </div>
+    <div class="barra-acciones">
+      <div class="conmutador" role="group" aria-label="Fidelidad del prototipo">
+        <button type="button" id="btn-baja" aria-pressed="false">Baja fidelidad</button>
+        <button type="button" id="btn-alta" aria-pressed="true">Alta fidelidad</button>
+      </div>
+      <p class="sesion" id="sesion-texto" hidden></p>
+      <button type="button" id="btn-salir" class="btn btn-texto" hidden>Cerrar sesión</button>
+    </div>
+  </header>
+
+  <main id="contenido">
+    <p class="aviso-boceto solo-baja" hidden>Boceto de baja fidelidad. Solo se muestran las funciones, sin diseño visual.</p>
+    <section id="vista-login" class="vista">
+      <div class="login-layout">
+        <aside class="login-lado solo-alta">
+          <p class="login-kicker">Edificio Nuevos Horizontes</p>
+          <h2>Gastos comunes, en un solo lugar</h2>
+          <p>160 departamentos. La administración cobra y los residentes consultan su estado sin planillas.</p>
+          <ul>
+            <li>Registro de residentes</li>
+            <li>Cuotas, montos y fechas</li>
+            <li>Avisos por morosidad</li>
+          </ul>
+        </aside>
+        <form class="tarjeta tarjeta-login" id="form-login">
+        <p class="etiqueta-funcion">Función 1 · Inicio de sesión</p>
+        <h1>Ingreso al sistema</h1>
+        <p class="ayuda">Administración y residentes consultan cuotas, pagos y avisos de morosidad en un mismo lugar.</p>
+        <div class="campo">
+          <label for="usuario">Usuario</label>
+          <input id="usuario" name="usuario" type="text" autocomplete="username" required placeholder="Ej. administrador">
+        </div>
+        <div class="campo">
+          <label for="clave">Contraseña</label>
+          <input id="clave" name="clave" type="password" autocomplete="current-password" required placeholder="Contraseña">
+        </div>
+        <p class="error" id="error-login" role="alert" hidden></p>
+        <button class="btn btn-primario" type="submit">Ingresar</button>
+        <div class="demo">
+          <p><strong>Cuentas de demostración</strong></p>
+          <p>Administración: usuario <code>administrador</code>, contraseña <code>1234</code></p>
+          <p>Residente: usuario <code>residente</code>, contraseña <code>1234</code></p>
+        </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="vista-app" class="vista" hidden>
+      <nav class="nav-funciones" aria-label="Funciones clave">
+        <button type="button" class="nav-item" data-pantalla="inicio">Inicio</button>
+        <button type="button" class="nav-item" data-pantalla="residentes">2 · Registro de residentes</button>
+        <button type="button" class="nav-item" data-pantalla="cuotas">3 · Cuotas y pagos</button>
+        <button type="button" class="nav-item" data-pantalla="alertas">4 · Recordatorios por morosidad</button>
+      </nav>
+
+      <div id="pantalla-inicio" class="pantalla">
+        <h1 id="saludo">Panel</h1>
+        <p class="ayuda" id="texto-rol"></p>
+        <div class="grilla-funciones">
+          <button type="button" class="tarjeta funcion" data-pantalla="residentes">
+            <span class="num">2</span>
+            <h2>Registro de residentes</h2>
+            <p>Nombre, unidad, contacto y tipo de residencia.</p>
+          </button>
+          <button type="button" class="tarjeta funcion" data-pantalla="cuotas">
+            <span class="num">3</span>
+            <h2>Cuotas y pagos</h2>
+            <p>Montos, fechas, estado pendiente, pagado o vencido.</p>
+          </button>
+          <button type="button" class="tarjeta funcion" data-pantalla="alertas">
+            <span class="num">4</span>
+            <h2>Recordatorios por morosidad</h2>
+            <p>Avisos a quienes tienen cuotas vencidas.</p>
+          </button>
+        </div>
+      </div>
+
+      <div id="pantalla-residentes" class="pantalla" hidden>
+        <p class="etiqueta-funcion">Función 2 · Gestión del registro de residentes</p>
+        <h1>Residentes</h1>
+        <p class="ayuda" id="ayuda-residentes"></p>
+        <form class="tarjeta formulario" id="form-residente">
+          <h2>Registrar residente</h2>
+          <div class="fila">
+            <div class="campo">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" name="nombre" required placeholder="Nombre y apellido">
+            </div>
+            <div class="campo">
+              <label for="unidad">Unidad</label>
+              <input id="unidad" name="unidad" required placeholder="Ej. 1204">
+            </div>
+          </div>
+          <div class="fila">
+            <div class="campo">
+              <label for="contacto">Contacto</label>
+              <input id="contacto" name="contacto" type="email" required placeholder="correo@ejemplo.cl">
+            </div>
+            <div class="campo">
+              <label for="tipo">Tipo de residencia</label>
+              <select id="tipo" name="tipo" required>
+                <option value="Propietario">Propietario</option>
+                <option value="Arrendatario">Arrendatario</option>
+              </select>
+            </div>
+          </div>
+          <p class="ok" id="ok-residente" role="status" hidden>Residente registrado. Ya puede asociarse una cuota.</p>
+          <button class="btn btn-primario" type="submit">Guardar residente</button>
+        </form>
+        <div class="tabla-wrap">
+          <table>
+            <caption>Residentes registrados</caption>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Unidad</th>
+                <th>Contacto</th>
+                <th>Tipo</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-residentes"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="pantalla-cuotas" class="pantalla" hidden>
+        <p class="etiqueta-funcion">Función 3 · Visualización de cuotas y pagos</p>
+        <h1>Cuotas y pagos</h1>
+        <p class="ayuda">Cada fila muestra el monto, la fecha de vencimiento o de pago, y el estado con texto, no solo con color.</p>
+        <div class="resumen" id="resumen-cuotas"></div>
+        <div class="tabla-wrap">
+          <table>
+            <caption>Cuotas y historial de pagos</caption>
+            <thead>
+              <tr>
+                <th>Residente</th>
+                <th>Unidad</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-cuotas"></tbody>
+          </table>
+        </div>
+        <form class="tarjeta formulario" id="form-pago">
+          <h2>Registrar pago</h2>
+          <div class="fila">
+            <div class="campo">
+              <label for="cuota-pago">Cuota pendiente</label>
+              <select id="cuota-pago" required></select>
+            </div>
+            <div class="campo">
+              <label for="fecha-pago">Fecha de pago</label>
+              <input id="fecha-pago" type="date" required>
+            </div>
+          </div>
+          <p class="ok" id="ok-pago" role="status" hidden>Pago registrado. La cuota pasó a estado Pagado.</p>
+          <button class="btn btn-primario" type="submit">Registrar pago</button>
+        </form>
+      </div>
+
+      <div id="pantalla-alertas" class="pantalla" hidden>
+        <p class="etiqueta-funcion">Función 4 · Recordatorios o alertas por morosidad</p>
+        <h1>Recordatorios por morosidad</h1>
+        <p class="ayuda" id="ayuda-alertas"></p>
+        <div id="bloque-envio" class="tarjeta">
+          <h2>Enviar recordatorio</h2>
+          <p>Se avisa a residentes con al menos una cuota vencida. El mensaje queda en su bandeja.</p>
+          <ul id="lista-morosos" class="lista"></ul>
+          <p class="ok" id="ok-alerta" role="status" hidden>Recordatorio enviado. El residente lo verá al ingresar con su cuenta.</p>
+          <button class="btn btn-primario" type="button" id="btn-enviar">Enviar recordatorios</button>
+        </div>
+        <div id="bloque-bandeja" class="tarjeta">
+          <h2>Alertas recibidas</h2>
+          <ul id="bandeja" class="lista"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>Prototipo de interfaz · Edificio Nuevos Horizontes · Semanas 6 y 7</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
